@@ -10,6 +10,11 @@ def config_file() -> str:
 server:
   port: 80
   host: localhost
+  routes:
+      - desc: A test route
+        method: GET
+        path: /test
+        body: Hello!
 """
 
 
@@ -26,3 +31,7 @@ def basic_config(config_file) -> Config:
 def test_service_config(basic_config):
     assert basic_config.port == 80
     assert basic_config.host == "localhost"
+    routes = basic_config.routes
+    assert routes[0].method == "GET"
+    assert routes[0].path == "/test"
+    assert routes[0].body == "Hello!"
