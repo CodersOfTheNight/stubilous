@@ -31,6 +31,9 @@ def basic_config(config_file) -> Config:
 def test_service_config(basic_config):
     assert basic_config.port == 80
     assert basic_config.host == "localhost"
+
+
+def test_route_config(basic_config):
     routes = basic_config.routes
     assert routes[0].method == "GET"
     assert routes[0].path == "/test"
