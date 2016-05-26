@@ -4,20 +4,25 @@ from stubilous.config import Config
 
 
 @fixture
-def basic_config() -> Config:
+def config_file() -> str:
+    return """
+---
+server:
+  port: 80
+  host: localhost
+"""
+
+
+@fixture
+def basic_config(config_file) -> Config:
     from io import StringIO
     import yaml
     buff = StringIO()
-    buff.write("""
-    ---
-    server:
-      port: 80
-      host: localhost
-    """)
+    buff.write(config_file)
+    buff.seek(0)
     return Config.from_dict(yaml.load(buff))
 
 
 def test_service_config(basic_config):
-    server = basic_config()
-    assert server.port == 80
-    assert server.host == "localhost"
+    assert basic_config.port == 80
+    assert basic_config.host == "localhost"
