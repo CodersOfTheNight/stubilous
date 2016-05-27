@@ -1,5 +1,6 @@
 # stubilous
 A plain simple Python http stub server
+[![Build Status](https://travis-ci.org/CodersOfTheNight/stubilous.svg?branch=master)](https://travis-ci.org/CodersOfTheNight/stubilous)
 
 Installing
 ==========
