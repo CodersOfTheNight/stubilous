@@ -6,8 +6,8 @@ def create_app():
     return Flask(__name__)
 
 
-def default_view(body, status=200, headers=None, *args, **kwargs):
-    response = make_response(body, status)
+def default_view(body, status=200, headers=None, **kwargs):
+    response = make_response(body(**kwargs), status)
     if headers:
         response.headers = headers
     return response
@@ -33,5 +33,4 @@ def init_routes(app, routes):
 def run(config):
     app = create_app()
     init_routes(app, config.routes)
-
-    app.run(config.host, config.port)
+    app.run(host=config.host, port=config.port)

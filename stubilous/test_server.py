@@ -1,13 +1,27 @@
+import logging
 from pytest import fixture
 from stubilous.builder import Builder
+logging.basicConfig(level=logging.DEBUG)
 
 
-@fixture(scope="module")
+@fixture(scope="session")
 def server(request):
+    from multiprocessing import Process
+    from stubilous.server import run
+    builder = Builder()
+    builder.server(host="localhost", port=9999)
+    builder.route("GET", "/hello/<name>")("Hello {{ name }}!", 200)
+
+    config = builder.build()
+    proc = Process(target=run, args=(config,))
+
     def on_close():
-        pass
+        proc.terminate()
+        proc.join()
 
     request.addfinalizer(on_close)
+    proc.start()
+    return proc
 
 
 def test_builder_server():
@@ -28,3 +42,10 @@ def test_builder_routes():
     assert route.status == 200
     assert route.body() == "Hello world!"
     assert route.method == "GET"
+
+
+def test_server_greeting(server):
+    import requests
+    result = requests.get("http://localhost:9999/hello/world")
+
+    assert result.text == "Hello world!"

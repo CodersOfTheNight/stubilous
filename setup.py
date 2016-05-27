@@ -20,4 +20,4 @@ setup(name="stubilous",
       packages=["stubilous"],
       setup_requires=[str(ir.req) for ir in install_reqs] + ["pytest-runner"],
       test_suite="pytest",
-      tests_require=["pytest"])
+      tests_require=["pytest", "requests"])
