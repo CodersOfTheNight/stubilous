@@ -8,7 +8,7 @@ Installing
 
 Requirements
 ============
-Python 3.5+ version
+Tested on Python 3.4 and 3.5 versions
 
 Example config
 ==============
