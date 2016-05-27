@@ -15,6 +15,7 @@ server:
         method: GET
         path: /test
         body: Hello!
+        status: 200
 """
 
 
