@@ -1,5 +1,6 @@
 # stubilous
-A plain simple Python http stub server
+A plain simple Python http stub server inspired by https://github.com/dreamhead/moco
+
 [![Build Status](https://travis-ci.org/CodersOfTheNight/stubilous.svg?branch=master)](https://travis-ci.org/CodersOfTheNight/stubilous)
 
 Installing
