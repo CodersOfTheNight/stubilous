@@ -30,11 +30,7 @@ def init_routes(app, routes):
                                                 route.headers)))
 
 
-def run(args):
-    import yaml
-    with open(args.config, "r") as f:
-        config = Config.from_dict(yaml.load(f))
-
+def run(config):
     app = create_app()
     init_routes(app, config.routes)
 
