@@ -1,6 +1,14 @@
 # stubilous
 A plain simple Python http stub server
 
+Installing
+==========
+`pip install stubilous`
+
+Requirements
+============
+Python 3.5+ version
+
 Example config
 ==============
 ```yaml

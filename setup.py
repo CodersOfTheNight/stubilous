@@ -5,7 +5,7 @@ install_reqs = list(parse_requirements("requirements.txt", session={}))
 
 
 def version():
-    import version
+    from stubilous import version
     return version.get_version()
 
 
