@@ -4,7 +4,7 @@ from stubilous.config import Config
 
 
 @fixture
-def config_file() -> str:
+def config_file():
     return """
 ---
 server:
@@ -25,8 +25,8 @@ server:
 
 
 @fixture
-def basic_config(config_file) -> Config:
-    from io import StringIO
+def basic_config(config_file):
+    from six import StringIO
     import yaml
     buff = StringIO()
     buff.write(config_file)

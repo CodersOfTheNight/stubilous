@@ -6,7 +6,7 @@ def create_app():
     return Flask(__name__)
 
 
-def default_view(body: str, status: int=200, headers: list=None, *args, **kwargs):
+def default_view(body, status=200, headers=None, *args, **kwargs):
     response = make_response(body, status)
     if headers:
         response.headers = headers
@@ -19,7 +19,7 @@ def wrap(fn):
     return fn
 
 
-def init_routes(app: Flask, routes: list):
+def init_routes(app, routes):
     from functools import partial
     for route in routes:
         app.add_url_rule(route.path,

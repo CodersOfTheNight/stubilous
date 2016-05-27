@@ -1,7 +1,7 @@
 class Route(object):
 
     @staticmethod
-    def from_dict(data: dict):
+    def from_dict(data):
         return Route(desc=data.get("desc"),
                      method=data["method"],
                      path=data["path"],
@@ -12,13 +12,13 @@ class Route(object):
                      )
 
     def __init__(self,
-                 desc: str,
-                 method: str,
-                 path: str,
-                 status: int=200,
-                 body: str=None,
-                 file: str=None,
-                 headers: list=None):
+                 desc,
+                 method,
+                 path,
+                 status=200,
+                 body=None,
+                 file=None,
+                 headers=None):
         self.desc = desc
         self.method = method
         self.path = path
@@ -40,13 +40,13 @@ class Route(object):
 class Config(object):
 
     @staticmethod
-    def from_dict(data: dict):
+    def from_dict(data):
         server = data["server"]
         return Config(host=server["host"],
                       port=server["port"],
                       routes=server["routes"])
 
-    def __init__(self, host: str, port: int, routes: list):
+    def __init__(self, host, port, routes):
         self.host = host
         self.port = port
         self.routes = [Route.from_dict(r)
