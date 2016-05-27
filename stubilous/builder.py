@@ -20,5 +20,11 @@ class Builder(object):
         self.port = port
         return self
 
-    def with(self, method, url):
+    def route(self, method, url):
         return partial(response, cls=self, method=method, path=url)
+
+    def build(self):
+        from stubilous.config import Config
+        return Config(host=self.host,
+                      port=self.port,
+                      routes=self.routes)

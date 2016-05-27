@@ -42,12 +42,14 @@ class Config(object):
     @staticmethod
     def from_dict(data):
         server = data["server"]
+        routes = [Route.from_dict(r)
+                  for r in server["routes"]]
+
         return Config(host=server["host"],
                       port=server["port"],
-                      routes=server["routes"])
+                      routes=routes)
 
     def __init__(self, host, port, routes):
         self.host = host
         self.port = port
-        self.routes = [Route.from_dict(r)
-                       for r in routes]
+        self.routes = routes
