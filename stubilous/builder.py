@@ -1,11 +1,9 @@
 from functools import partial
 
 
-def response(cls, method, url, body, status=200):
+def response(callback, method, url, body, status=200):
     from stubilous.config import Route
-    route = Route(method=method, path=url, body=body, status=status)
-    cls.routes.append(route)
-    return cls
+    callback(Route(method=method, path=url, body=body, status=status, desc=""))
 
 
 class Builder(object):
@@ -21,7 +19,11 @@ class Builder(object):
         return self
 
     def route(self, method, url):
-        return partial(response, cls=self, method=method, path=url)
+        def callback(route):
+            self.routes.append(route)
+            return self
+
+        return partial(response, callback, method, url)
 
     def build(self):
         from stubilous.config import Config
