@@ -25,11 +25,16 @@ class Route(object):
         self.status = status
         if file:
             with open(self.file, "r") as f:
-                self.body = f.read()
+                self._body = f.read()
         else:
-            self.body = body
+            self._body = body
 
         self.headers = headers
+
+    def body(self, **kwargs):
+        from jinja2 import Template
+        tmpl = Template(self._body)
+        return tmpl.render(kwargs)
 
 
 class Config(object):

@@ -16,6 +16,11 @@ server:
         path: /test
         body: Hello!
         status: 200
+      - desc: Advanced route
+        method: GET
+        path: /test/<name>
+        body: Hello {{name}}!
+        status: 200
 """
 
 
@@ -35,7 +40,13 @@ def test_service_config(basic_config):
 
 
 def test_route_config(basic_config):
-    routes = basic_config.routes
-    assert routes[0].method == "GET"
-    assert routes[0].path == "/test"
-    assert routes[0].body == "Hello!"
+    route = basic_config.routes[0]
+    assert route.method == "GET"
+    assert route.path == "/test"
+    assert route.body() == "Hello!"
+
+
+def test_template_route(basic_config):
+    route = basic_config.routes[1]
+    assert route.method == "GET"
+    assert route.body(name="test") == "Hello test!"
