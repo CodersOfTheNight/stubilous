@@ -1,15 +1,17 @@
 from flask import Flask, make_response
-from stubilous.config import Config
 
 
 def create_app():
     return Flask(__name__)
 
 
-def default_view(body, status=200, headers=None, **kwargs):
+def default_view(body, status=200, headers=None, cookies=None, **kwargs):
     response = make_response(body(**kwargs), status)
     if headers:
         response.headers = headers
+
+    if cookies:
+        response.cookies = cookies
     return response
 
 

@@ -8,7 +8,8 @@ class Route(object):
                      status=data["status"],
                      body=data.get("body"),
                      file=data.get("file"),
-                     headers=data.get("headers")
+                     headers=data.get("headers"),
+                     cookies=data.get("cookies")
                      )
 
     def __init__(self,
@@ -18,7 +19,8 @@ class Route(object):
                  status=200,
                  body=None,
                  file=None,
-                 headers=None):
+                 headers=None,
+                 cookies=None):
         self.desc = desc
         self.method = method
         self.path = path
@@ -30,6 +32,7 @@ class Route(object):
             self._body = body
 
         self.headers = headers
+        self.cookies = cookies
 
     def body(self, **kwargs):
         from jinja2 import Template
