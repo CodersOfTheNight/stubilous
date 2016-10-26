@@ -1,9 +1,22 @@
 from functools import partial
+from stubilous.config import Route
 
 
-def response(callback, method, url, body, status=200):
-    from stubilous.config import Route
-    callback(Route(method=method, path=url, body=body, status=status, desc=""))
+def response(callback,
+             method,
+             url,
+             body,
+             status=200,
+             headers=None,
+             cookies=None):
+
+    callback(Route(method=method,
+                   path=url,
+                   body=body,
+                   status=status,
+                   desc="",
+                   headers=headers,
+                   cookies=cookies))
 
 
 class Builder(object):
