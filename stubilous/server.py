@@ -1,3 +1,4 @@
+import logging
 from flask import Flask, make_response
 
 
@@ -30,6 +31,10 @@ def init_routes(app, routes):
                                                 route.body,
                                                 route.status,
                                                 route.headers)))
+
+    @app.errorhandler(404)
+    def incorrect_route(ex):
+        logging.error(ex)
 
 
 def run(config):
