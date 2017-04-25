@@ -1,4 +1,8 @@
 import logging
+import uuid
+
+from functools import partial
+
 from flask import Flask, make_response
 
 
@@ -17,13 +21,11 @@ def default_view(body, status=200, headers=None, cookies=None, **kwargs):
 
 
 def wrap(fn):
-    import uuid
     fn.__name__ = str(uuid.uuid4())
     return fn
 
 
 def init_routes(app, routes):
-    from functools import partial
     for route in routes:
         app.add_url_rule(route.path,
                          methods=[route.method],

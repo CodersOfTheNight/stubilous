@@ -1,5 +1,5 @@
 from functools import partial
-from stubilous.config import Route
+from stubilous.config import Route, Config
 
 
 def response(callback,
@@ -39,7 +39,6 @@ class Builder(object):
         return partial(response, callback, method, url)
 
     def build(self):
-        from stubilous.config import Config
         return Config(host=self.host,
                       port=self.port,
                       routes=self.routes)

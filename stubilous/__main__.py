@@ -1,9 +1,12 @@
-if __name__ == "__main__":
-    from argparse import ArgumentParser
-    import yaml
+import yaml
 
-    from stubilous.server import run
-    from stubilous.config import Config
+from argparse import ArgumentParser
+
+from stubilous.server import run
+from stubilous.config import Config
+
+
+if __name__ == "__main__":
     parser = ArgumentParser()
     parser.add_argument("--config", help="Service configuration file")
     args = parser.parse_args()
