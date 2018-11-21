@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 from setuptools import setup
-from pip.req import parse_requirements
+try:
+    from pip._internal.req import parse_requirements
+except:
+    from pip.req import parse_requirements
 
 install_reqs = list(parse_requirements("requirements.txt", session={}))
 
